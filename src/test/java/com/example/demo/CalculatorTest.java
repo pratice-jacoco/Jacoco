@@ -23,12 +23,22 @@ class CalculatorTest {
 
     @Test
     void testDiv() {
-        // 정상적인 나누기 테스트
         int result = calculator.div(6, 3);
         assertThat(result).isEqualTo(2);
 
-        // 0으로 나누는 경우 예외 처리 테스트
         ArithmeticException exception = assertThrows(ArithmeticException.class, () -> calculator.div(6, 0));
         assertThat(exception.getMessage()).isEqualTo("Cannot divide by zero");
+    }
+
+    @Test
+    void testMultiply() {
+        int result = calculator.multiply(2, 3);
+        assertThat(result).isEqualTo(6);
+
+        result = calculator.multiply(-2, 3);
+        assertThat(result).isEqualTo(-6);
+
+        result = calculator.multiply(0, 5);
+        assertThat(result).isEqualTo(0);
     }
 }
