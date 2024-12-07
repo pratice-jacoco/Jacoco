@@ -62,13 +62,10 @@ jobs:
           ./gradlew checkstyleMain
           ./gradlew checkstyleTest
 
-      - name: Get the Coverage info
-        run: |
-          echo "Total coverage ${{ steps.jacoco.outputs.coverage-overall }}"
-          echo "Changed Files coverage ${{ steps.jacoco.outputs.coverage-changed-files }}"
-
-      - name: Flush Checkstyle report on the status checks
-        uses: lcollins/checkstyle-github-action@v2.0.0
+      - name: Upload Checkstyle reports
+        uses: actions/upload-artifact@v4
         with:
-          path: '**/build/reports/checkstyle/**.xml'
-          title: 📝 Checkstyle report
+          name: checkstyle-reports
+          path: |
+            ${{ github.workspace }}/build/reports/checkstyle/*.xml
+            ${{ github.workspace }}/build/reports/checkstyle/*.html
