@@ -69,3 +69,13 @@ jobs:
           path: |
             ${{ github.workspace }}/build/reports/checkstyle/*.xml
             ${{ github.workspace }}/build/reports/checkstyle/*.html
+
+      - name: Checkstyle Report to PR
+        uses: reviewdog/action-checkstyle@v2
+        with:
+          tool_name: "checkstyle"
+          input_file: ${{ github.workspace }}/build/reports/checkstyle/main.xml
+          reporter: github-pr-review
+          level: warning
+          filter_mode: added
+          github_token: ${{ secrets.GITHUB_TOKEN }}
