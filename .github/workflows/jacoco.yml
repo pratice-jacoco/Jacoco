@@ -31,7 +31,6 @@ jobs:
         uses: gradle/gradle-build-action@v3
         with:
           arguments: build
-          cache-read-only: ${{ github.ref != 'refs/heads/main' && github.ref != 'refs/heads/dev' }}
 
       - name: Jacoco Report to PR
         id: jacoco
