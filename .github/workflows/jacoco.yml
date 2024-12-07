@@ -1,12 +1,12 @@
 name: 'Jacoco'
 
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+#on:
+#  push:
+#    branches:
+#      - main
+#  pull_request:
+#    branches:
+#      - main
 
 permissions: write-all
 
@@ -25,16 +25,14 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: Setup Gradle
-        uses: gradle/gradle-build-action@v3
-        with:
-          arguments: build
+      - name: Test with Gradle
+        run: ./gradlew --info test
 
       - name: Jacoco Report to PR
         id: jacoco
         uses: madrapps/jacoco-report@v1.6.1
         with:
-          paths: ${{ github.workspace }}/build/jacocoReport/test/jacocoTestReport.xml
+          paths: ${{ github.workspace }}/build/reports/jacoco/test/jacocoTestReport.xml
           token: ${{ secrets.GITHUB_TOKEN }}
           min-coverage-overall: 80
           min-coverage-changed-files: 80
@@ -46,7 +44,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: jacoco-html-report
-          path: ${{ github.workspace }}/build/jacocoReport/test/html
+          path: ${{ github.workspace }}/build/reports/jacoco/test/html
 
       - name: Get the Coverage info
         run: |
