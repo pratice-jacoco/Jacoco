@@ -57,6 +57,11 @@ jobs:
           name: jacoco-html-report
           path: ${{ github.workspace }}/build/reports/jacoco/test/html
 
+      - name: Run Checkstyle
+        run: |
+          ./gradlew checkstyleMain
+          ./gradlew checkstyleTest
+
       - name: Get the Coverage info
         run: |
           echo "Total coverage ${{ steps.jacoco.outputs.coverage-overall }}"
