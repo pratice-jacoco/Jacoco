@@ -44,7 +44,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: jacoco-html-report
-          path: ${{ github.workspace }}/build/jacocoReport/test/html
+          path: ${{ github.workspace }}/build/reports/jacoco/test/html
 
       - name: Get the Coverage info
         run: |
